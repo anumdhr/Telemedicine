@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,20 +27,11 @@ class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return
-        // BlocListener<AuthCubit, AuthState>(
-        // listener: (context, authState) {
-        //   if (!authState.isTokenExpires) {
-        //     // Navigator.pushNamed(context, RouteConstant.routeXittoMain);
-        //     // Navigator.push(MaterialPageRoute(builder: builder))
-        //     //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider(
-        //     //     create: (context) => HideBottomNavCubit(),
-        //     //       child: XittoMain())));
-        //     // }
-        //   }
-        // },
+
       ScreenWithBackgroundImage(
       body: Stack(
         children: [
@@ -218,9 +210,7 @@ class LoginPage extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           Navigator.pushNamed(context, RouteConstant.routeHomePage);
 
-                          // context.read<AuthCubit>().login(
-                          //   loginData: _formKey.currentState!.value,
-                          // );
+
                         }
                       },
                     ),
@@ -242,7 +232,6 @@ class LoginPage extends StatelessWidget {
                           onTap: () {
                             Navigator.pushNamed(context, RouteConstant.routeRegister);
 
-                            // Xitto.to(routeName: RouteConstant.routeRegister);
                             // Navigator.pushNamed(context, RouteConstant.routeRegister);
                           },
                           child: Text(
@@ -258,7 +247,6 @@ class LoginPage extends StatelessWidget {
                     sboxH40,
                     InkWell(
                       onTap: () {
-                        // Navigator.pushNamed(context, RouteConstant.routeXittoMain);
                       },
                       child: Text(
                         "Skip for Now",

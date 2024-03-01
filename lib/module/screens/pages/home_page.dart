@@ -5,6 +5,7 @@ import 'package:seventh_sem_project/components/appointment_card.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
+import 'package:seventh_sem_project/module/utils/route_constant.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,9 +42,40 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  void navigateToCategoryPage(String category) {
+    switch (category) {
+      case "General":
+        Navigator.pushNamed(context, RouteConstant.routeHomePage);
+
+        break;
+      case "Cardiology":
+        Navigator.pushNamed(context, RouteConstant.routePrediction);
+
+        break;
+      case "Respiration":
+        Navigator.pushNamed(context, RouteConstant.routeHomePage);
+
+        break;
+      case "Dermatology":
+        Navigator.pushNamed(context, RouteConstant.routeHomePage);
+
+        break;
+      case "Gynacology":
+        Navigator.pushNamed(context, RouteConstant.routeHomePage);
+
+        break;
+      case "Dental":
+        Navigator.pushNamed(context, RouteConstant.routeHomePage);
+
+        break;
+
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -88,25 +120,30 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: List.generate(specialist.length, (index) {
-                    return Card(
-                      color: primaryColor,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        child: Row(
-                          children: [
-                            FaIcon(
-                              specialist[index]["icon"],
-                              color: Colors.white,
-                            ),
-                            sboxW2,
-                            CustomText(
-                              specialist[index]["category"],
-                              style: const TextStyle(
-                                fontFamily: "Full Sans LC Medium",
+                    return GestureDetector(
+                      onTap: () {
+                        navigateToCategoryPage(specialist[index]["category"]);
+                      },
+                      child: Card(
+                        color: primaryColor,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          child: Row(
+                            children: [
+                              FaIcon(
+                                specialist[index]["icon"],
                                 color: Colors.white,
                               ),
-                            ),
-                          ],
+                              sboxW2,
+                              CustomText(
+                                specialist[index]["category"],
+                                style: const TextStyle(
+                                  fontFamily: "Full Sans LC Medium",
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -127,18 +164,20 @@ class _HomePageState extends State<HomePage> {
               sboxH20,
 
               ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(height: 15,),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 15,
+                ),
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                     // height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color:Colors.white,
+                      color: Colors.white,
                     ),
                     child: Row(
                       children: [
@@ -177,7 +216,6 @@ class _HomePageState extends State<HomePage> {
                                 const Text('4.5'),
                                 sboxW15,
                                 const Text('Reviews'),
-
                                 const Text('(20)'),
                               ],
                             ),
@@ -188,7 +226,6 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ), // ListView.builder(
-
             ],
           ),
         ),

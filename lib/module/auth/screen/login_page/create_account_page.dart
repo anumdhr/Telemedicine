@@ -3,9 +3,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth_controller.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
+import 'package:seventh_sem_project/module/utils/validator.dart';
 
 import '../../../common_widget/custom_button.dart';
 import '../../../common_widget/custom_textfield_for_register.dart';
@@ -73,6 +73,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             sboxH20,
                             CustomTextFieldForRegister(
+                              validator: (p0) {
+                                return Validator().emptyValidator(p0);
+                              },
                               hintText: "Full Name",
                               controller: ac.nameController,
                               attribute: "name",
@@ -81,11 +84,12 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                 fit: BoxFit.scaleDown,
                                 color: Color(0xff8C8C8C),
                               ),
-                              onChange: (name) {},
                             ),
                             sboxH12,
                             CustomTextFieldForRegister(
-                              onChange: (value) {},
+                              validator: (p0) {
+                                return Validator().emptyValidator(p0);
+                              },
                               controller: ac.phoneController,
                               hintText: "Enter your mobile number",
                               prefixIcon: SvgPicture.asset("assets/images/mobile-phone.svg", fit: BoxFit.scaleDown, color: Color(0xff8C8C8C)),
@@ -96,11 +100,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                 stream: ac.hidePassword.stream,
                                 builder: (context, snapshot) {
                                   return CustomTextFieldForRegister(
+                                    validator: (p0) {
+                                      return Validator().emptyValidator(p0);
+                                    },
                                     hintText: "Enter Password",
                                     controller: ac.passwordController,
                                     attribute: "password",
-                                    onChange: (value) => {},
-                                    prefixIcon: SvgPicture.asset("assets/images/padlock.svg",color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                                    prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                                     obscureText: snapshot.data ?? true,
                                     suffixIcon: GestureDetector(
                                         onTap: () => ac.hidePassword.sink.add(!snapshot.data!),
@@ -121,27 +127,32 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                 }),
                             sboxH12,
                             CustomTextFieldForRegister(
+                              validator: (p0) {
+                                return Validator().emptyValidator(p0);
+                              },
                               hintText: "Confirm Password",
                               attribute: "confirmPassword",
                               controller: ac.confirmPassController,
-                              prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C),fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                               suffixIcon: SvgPicture.asset(
                                 "assets/images/tick.svg",
                                 color: Color(0xff8C8C8C),
                                 fit: BoxFit.scaleDown,
                               ),
                               obscureText: true,
-                              onChange: (conPassword) {},
                             ),
                             sboxH12,
 
                             CustomTextFieldForRegister(
+                              validator: (p0) {
+                                return Validator().emptyValidator(p0);
+                              },
                               readOnly: true,
                               controller: ac.genderController,
                               // readOnly: true,
                               hintText: "Gender",
                               attribute: "gender",
-                              prefixIcon: SvgPicture.asset("assets/images/intersex.svg", color: Color(0xff8C8C8C),fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/intersex.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                               suffixIcon: PopupMenuButton(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 padding: EdgeInsets.zero,
@@ -192,11 +203,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             sboxH12,
                             CustomTextFieldForRegister(
+                              validator: (p0) {
+                               return Validator().emptyValidator(p0);
+                              },
                               hintText: "Full Address",
                               controller: ac.addressController,
                               attribute: "city",
                               prefixIcon: SvgPicture.asset("assets/images/street.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
-                              onChange: (value) {},
                             ),
 
                             //terms and condition
@@ -212,7 +225,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                           height: 10.0,
                                           width: 20.0,
                                           child: Checkbox(
-
                                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                                             side: const BorderSide(
                                               color: Color(0xff8C8C8C),
@@ -240,15 +252,17 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                           fontSize: 12,
                                         )),
                                   ),
-
                                 ],
                               ),
                             ),
                             sboxH15,
 
                             CustomButton(
-                              onTap: () async {
-                                Navigator.pushNamed(context, RouteConstant.routeHomePage);
+                              onTap: () {
+                                _formKey.currentState!.save();
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pushNamed(context, RouteConstant.routeHomePage);
+                                }
                               },
                               title: "Register",
                             ),

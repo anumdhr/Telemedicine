@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seventh_sem_project/module/common_widget/screen_witgh_background_image.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
 
-import '../auth/screen/login_page/login_page.dart';
 import '../common_widget/common_text.dart';
 
 class SplashScreen extends StatefulWidget {

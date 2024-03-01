@@ -4,6 +4,7 @@ class RouteConstant {
   static const String routeLogin = 'login';
   static const String routeRegister = 'register';
   static const String routeHomePage = 'home';
+  static const String routePrediction = 'prediction';
 
 
 

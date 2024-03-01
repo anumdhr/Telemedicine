@@ -2,8 +2,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:seventh_sem_project/module/auth/model/user_model.dart';
 
-class AuthController extends GetxController{
+class AuthController extends GetxController {
   final hidePassword = BehaviorSubject<bool>.seeded(true);
   final acceptTerm = BehaviorSubject<bool>.seeded(false);
   final genderController = TextEditingController();
@@ -12,4 +13,6 @@ class AuthController extends GetxController{
   final confirmPassController = TextEditingController();
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
+
+  final userModeList = <NewUserModel>[].obs;
 }

@@ -104,14 +104,14 @@ class CustomTextFieldForRegister extends StatelessWidget {
                   borderSide:  BorderSide(
                       width: 1,
                       // style: BorderStyle.none,
-                      color: validate!  ? Colors.transparent: Colors.red
+                      color: validate!  ? Colors.transparent: Colors.red,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide:  BorderSide(
                     width: 1,
-                    color: validate!  ? Colors.transparent: Colors.red  ,
+                    color: validate!  ? Colors.transparent: Colors.red,
                   ),
                 ),
               ),
