@@ -3,22 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth_controller.dart';
+import 'package:seventh_sem_project/module/auth/screen/login_page/create_account_page.dart';
 import 'package:seventh_sem_project/module/screens/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/main_page/main_page.dart';
 import 'package:seventh_sem_project/module/screens/pages/heart_disease_prediction/controller.dart';
-import 'package:seventh_sem_project/module/screens/pages/home_page.dart';
+import 'package:seventh_sem_project/module/screens/pages/home_page/home_page.dart';
 import 'package:seventh_sem_project/module/screens/pages/profile/profile_controller.dart';
 import 'package:seventh_sem_project/module/screens/splash_screen.dart';
 import 'package:seventh_sem_project/module/sqflite_db/sqflite_database.dart';
+import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
 
 import 'module/routes/custom_page_route_builder.dart';
 import 'module/routes/routes.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DatabaseService().connectDb();
+  await SharedPreferenceDB.init();
+
   runApp(const MyApp());
 }
 
@@ -32,11 +36,12 @@ class MyApp extends StatelessWidget {
     Get.put(AuthController());
     Get.put(ProfileController());
     Get.put(HDPredictionController());
+    Get.put(SharedPreferenceDB());
     return MaterialApp(
       navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
       onGenerateInitialRoutes: (pastRoute) {
-        return [CustomPageRouteBuilder(widget: TelemedicineMain())];
+        return [CustomPageRouteBuilder(widget: SplashScreen())];
       },
 
       debugShowCheckedModeBanner: false,

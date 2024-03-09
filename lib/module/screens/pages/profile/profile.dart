@@ -10,7 +10,8 @@ import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 import 'dart:io';
 
-import 'package:seventh_sem_project/module/utils/route_constant.dart'; // Import the dart:io library
+import 'package:seventh_sem_project/module/utils/route_constant.dart';
+import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart'; // Import the dart:io library
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -42,21 +43,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   "Profile".toUpperCase(),
                   style: customStyle1,
                 ),
-                GestureDetector(onTap: () {
-                  Navigator.pushNamed(context, RouteConstant.routeLogin);
+                GestureDetector(
+                    onTap: () {
+                      final pref = Get.find<SharedPreferenceDB>();
+                      pref.saveUserName(false);
 
-                }, child: Row(
-                  children: [
-                    Icon(Icons.logout),
-                    CustomText("Logout",
-                      style: CustomStyle.textFullSansLcBook.copyWith(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                      ),
-                    ),
-                  ],
-                ))
+                      Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        CustomText(
+                          "Logout",
+                          style: CustomStyle.textFullSansLcBook.copyWith(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      ],
+                    ))
               ],
             ),
             sboxH12,
@@ -97,12 +99,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-
             sboxH12,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(" My Details".toUpperCase(),
+                CustomText(
+                  " My Details".toUpperCase(),
                   style: CustomStyle.textFullSansLcBook.copyWith(
                     fontSize: 15,
                   ),
@@ -142,9 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () {
-
-                                },
+                                onTap: () {},
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 9),
                                   width: double.infinity,
@@ -157,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 2),
                                       child: Text(
-                                       "Edit" ,
+                                        "Edit",
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontFamily: "Full Sans LC Book",

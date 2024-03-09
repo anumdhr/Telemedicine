@@ -3,7 +3,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth_controller.dart';
+import 'package:seventh_sem_project/module/auth/model/user_model.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
 import 'package:seventh_sem_project/module/utils/validator.dart';
 
@@ -59,9 +61,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     decoration: const BoxDecoration(
                         color: Color(0xffFFFFFF), borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                     child: SingleChildScrollView(
-                      child: FormBuilder(
-                        key: _formKey,
-                        child: Column(
+                      child: Obx(() {
+                        return Column(
                           children: [
                             sboxH25,
                             Text(
@@ -73,8 +74,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             sboxH20,
                             CustomTextFieldForRegister(
-                              validator: (p0) {
-                                return Validator().emptyValidator(p0);
+                              validate: ac.validateName.value,
+                              onChange: (value) {
+                                ac.onNameChange(name: ac.nameController.value.text.trim());
                               },
                               hintText: "Full Name",
                               controller: ac.nameController,
@@ -82,89 +84,102 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               prefixIcon: SvgPicture.asset(
                                 "assets/images/user.svg",
                                 fit: BoxFit.scaleDown,
-                                color: Color(0xff8C8C8C),
+                                color: const Color(0xff8C8C8C),
                               ),
                             ),
                             sboxH12,
                             CustomTextFieldForRegister(
-                              validator: (p0) {
-                                return Validator().emptyValidator(p0);
-                              },
+                              validate: ac.validatePhone.value,
                               controller: ac.phoneController,
                               hintText: "Enter your mobile number",
-                              prefixIcon: SvgPicture.asset("assets/images/mobile-phone.svg", fit: BoxFit.scaleDown, color: Color(0xff8C8C8C)),
+                              prefixIcon: SvgPicture.asset("assets/images/mobile-phone.svg", fit: BoxFit.scaleDown, color: const Color(0xff8C8C8C)),
                               attribute: "phone",
+                              onChange: (value) {
+                                ac.onPhoneChange(phone: ac.phoneController.value.text.trim());
+                              },
                             ),
                             sboxH12,
                             StreamBuilder<bool>(
                                 stream: ac.hidePassword.stream,
                                 builder: (context, snapshot) {
-                                  return CustomTextFieldForRegister(
-                                    validator: (p0) {
-                                      return Validator().emptyValidator(p0);
-                                    },
-                                    hintText: "Enter Password",
-                                    controller: ac.passwordController,
-                                    attribute: "password",
-                                    prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
-                                    obscureText: snapshot.data ?? true,
-                                    suffixIcon: GestureDetector(
-                                        onTap: () => ac.hidePassword.sink.add(!snapshot.data!),
-                                        child: snapshot.data!
-                                            ? SvgPicture.asset(
-                                                "assets/images/view.svg",
-                                                color: Color(0xff8C8C8C),
-                                                fit: BoxFit.scaleDown,
-                                              )
-                                            : SvgPicture.asset(
-                                                "assets/images/Hide visibility.svg",
-                                                height: 30,
-                                                width: 30,
-                                                fit: BoxFit.scaleDown,
-                                                color: Color(0xff8C8C8C),
-                                              )),
-                                  );
+                                  return Obx(() {
+                                    return CustomTextFieldForRegister(
+                                      validate: ac.validatePassword.value,
+                                      hintText: "Enter Password",
+                                      controller: ac.passwordController,
+                                      attribute: "password",
+                                      prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                                      obscureText: snapshot.data ?? true,
+                                      suffixIcon: GestureDetector(
+                                          onTap: () => ac.hidePassword.sink.add(!snapshot.data!),
+                                          child: snapshot.data!
+                                              ? SvgPicture.asset(
+                                                  "assets/images/view.svg",
+                                                  color: Color(0xff8C8C8C),
+                                                  fit: BoxFit.scaleDown,
+                                                )
+                                              : SvgPicture.asset(
+                                                  "assets/images/Hide visibility.svg",
+                                                  height: 30,
+                                                  width: 30,
+                                                  fit: BoxFit.scaleDown,
+                                                  color: Color(0xff8C8C8C),
+                                                )),
+                                      onChange: (value) {
+                                        ac.onPasswordChange(password: ac.passwordController.value.text.trim());
+                                      },
+                                    );
+                                  });
                                 }),
                             sboxH12,
                             CustomTextFieldForRegister(
-                              validator: (p0) {
-                                return Validator().emptyValidator(p0);
-                              },
+                              validate: ac.validateConfirmPassword.value,
                               hintText: "Confirm Password",
                               attribute: "confirmPassword",
                               controller: ac.confirmPassController,
-                              prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/padlock.svg", color: const Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                               suffixIcon: SvgPicture.asset(
                                 "assets/images/tick.svg",
-                                color: Color(0xff8C8C8C),
+                                color: const Color(0xff8C8C8C),
                                 fit: BoxFit.scaleDown,
                               ),
                               obscureText: true,
+                              onChange: (value) {
+                                ac.onConfirmPasswordChange(
+                                    password: ac.passwordController.value.text.trim(), confirmPassword: ac.confirmPassController.value.text.trim());
+                              },
                             ),
                             sboxH12,
 
                             CustomTextFieldForRegister(
-                              validator: (p0) {
-                                return Validator().emptyValidator(p0);
+                              validate: ac.validateGender.value,
+
+
+                              onChange: (value) {
+                                ac.onGenderChange(gender: ac.genderController.value.text.trim());
                               },
+
                               readOnly: true,
                               controller: ac.genderController,
                               // readOnly: true,
                               hintText: "Gender",
                               attribute: "gender",
-                              prefixIcon: SvgPicture.asset("assets/images/intersex.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/intersex.svg", color: const Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                               suffixIcon: PopupMenuButton(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 padding: EdgeInsets.zero,
-                                onSelected: (value) {},
+                                onSelected: (value) {
+                                  ac.genderController.text = value.toString();
+                                },
                                 child: SvgPicture.asset(
                                   "assets/images/Chevron_down.svg",
-                                  color: Color(0xff8C8C8C),
+                                  color: const Color(0xff8C8C8C),
                                   fit: BoxFit.scaleDown,
                                 ),
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
+
                                       value: "Male",
                                       height: 40,
                                       child: Text(
@@ -203,13 +218,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             sboxH12,
                             CustomTextFieldForRegister(
-                              validator: (p0) {
-                               return Validator().emptyValidator(p0);
+                              validate: ac.validateAddress.value,
+                              onChange: (value) {
+                                ac.onAddressChange(address: ac.addressController.value.text.trim());
                               },
                               hintText: "Full Address",
                               controller: ac.addressController,
                               attribute: "city",
-                              prefixIcon: SvgPicture.asset("assets/images/street.svg", color: Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/street.svg", color: const Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                             ),
 
                             //terms and condition
@@ -240,7 +256,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                   FittedBox(
                                     child: Text("I accept",
                                         style: CustomStyle.textFullSansLcBook.copyWith(
-                                          color: Color(0xff8C8C8C),
+                                          color: const Color(0xff8C8C8C),
                                           fontSize: 12,
                                         )),
                                   ),
@@ -248,7 +264,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                   FittedBox(
                                     child: Text("Terms and Conditions",
                                         style: CustomStyle.textFullSansLcBook.copyWith(
-                                          color: Color(0xff8C8C8C),
+                                          color: const Color(0xff8C8C8C),
                                           fontSize: 12,
                                         )),
                                   ),
@@ -259,8 +275,20 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
                             CustomButton(
                               onTap: () {
-                                _formKey.currentState!.save();
-                                if (_formKey.currentState!.validate()) {
+                                Logger().d('name is ${ac.validateName.value}');
+                                Logger().d('add is ${ac.validateAddress.value}');
+                                Logger().d('gender is ${ac.validateGender.value}');
+                                Logger().d('pw is ${ac.validatePassword.value}');
+                                Logger().d('cf is ${ac.validateConfirmPassword.value}');
+                                Logger().d('phone is ${ac.validatePhone.value}');
+                                // Logger().d('phone is ${ac.newUserModel.value.phone}');
+                                // Logger().d('pw is ${ac.newUserModel.value.password}');
+                                // Logger().d('address is ${ac.newUserModel.value.address}');
+                                // Logger().d('conf is ${ac.newUserModel.value.confirmPassword}');
+                                Logger().d(ac.onCheckAllFieldValid());
+                                if (ac.onCheckAllFieldValid() == true) {
+                                  ac.newUser();
+
                                   Navigator.pushNamed(context, RouteConstant.routeHomePage);
                                 }
                               },
@@ -274,7 +302,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                   "Already have an account ?",
                                   style: CustomStyle.textFullSansLcBook.copyWith(
                                     fontSize: 14,
-                                    color: Color(0xff8C8C8C),
+                                    color: const Color(0xff8C8C8C),
                                   ),
                                 ),
                                 const SizedBox(
@@ -288,7 +316,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                     "Login Here",
                                     style: CustomStyle.textFullSansLcMediumItalic.copyWith(
                                       fontSize: 14,
-                                      color: Color(0xff8C8C8C),
+                                      color: const Color(0xff8C8C8C),
                                     ),
                                   ),
                                 ),
@@ -296,8 +324,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             ),
                             sboxH30,
                           ],
-                        ),
-                      ),
+                        );
+                      }),
                     ),
                   ),
                 ),

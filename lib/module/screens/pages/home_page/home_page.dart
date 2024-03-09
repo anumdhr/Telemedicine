@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:seventh_sem_project/components/appointment_card.dart';
+import 'package:seventh_sem_project/module/screens/pages/home_page/widgets/appointment_card.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
@@ -73,6 +73,8 @@ class _HomePageState extends State<HomePage> {
         break;
     }
   }
+
+  bool isToggle = false;
 
   @override
   Widget build(BuildContext context) {
@@ -157,9 +159,24 @@ class _HomePageState extends State<HomePage> {
               ),
               AppointmentCard(),
               sboxH20,
-              const CustomText(
-                "Popular Doctors",
-                style: customStyle,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    "Popular Doctors",
+                    style: customStyle,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isToggle = !isToggle!;
+                      });
+                    },
+                    child: CustomText(
+                      isToggle == false ? "View More" : "View Less",
+                    ),
+                  ),
+                ],
               ),
               sboxH20,
 
@@ -170,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 20,
+                itemCount: isToggle ? 20 : 2,
                 itemBuilder: (context, index) {
                   return Container(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),

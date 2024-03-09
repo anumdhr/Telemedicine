@@ -11,16 +11,18 @@ class DatabaseService {
         'CREATE TABLE $tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, age INTEGER, sex INTEGER, chest INTEGER, bloodPressure INTEGER, cholestrol INTEGER, sugar INTEGER, heartRate INTEGER, dateTime String)',
       );
     }, onConfigure: onConfigure);
-    if (database != null) {
-      Logger().d("Database connected successfully ");
-      // print('Database connected successfully ');
-      return database;
-    } else {
-      Logger().d("Unable to connect to database ");
+    // if (database != null) {
+    //   Logger().d("Database connected successfully ");
+    //   // print('Database connected successfully ');
+    //   return database;
+    // } else {
+    //   Logger().d("Unable to connect to database ");
+    //
+    //   // print('Unable to connect to database ');
+    //   return database;
+    // }
+    return database;
 
-      // print('Unable to connect to database ');
-      return database;
-    }
   }
 
   onConfigure(Database db) async {

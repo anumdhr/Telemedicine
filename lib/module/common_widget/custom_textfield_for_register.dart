@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:seventh_sem_project/module/utils/const.dart';
 
 import '../utils/custom_text_style.dart';
 
@@ -75,6 +74,9 @@ class CustomTextFieldForRegister extends StatelessWidget {
           textInputAction: TextInputAction.next,
           decoration: inputDecoration ??
               InputDecoration(
+                errorStyle: TextStyle(
+                  fontSize: 0,
+                ),
                 suffixIcon: suffixIcon,
                 isCollapsed: true,
                 contentPadding: const EdgeInsets.only(top: 5),
@@ -94,7 +96,7 @@ class CustomTextFieldForRegister extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   borderSide:  BorderSide(
                     width: 1,
-                    color: validate!  ? Colors.transparent: Colors.red  ,
+                    color: validate == true  ? Colors.transparent: Colors.red  ,
 
                   ),
                 ),
@@ -104,14 +106,14 @@ class CustomTextFieldForRegister extends StatelessWidget {
                   borderSide:  BorderSide(
                       width: 1,
                       // style: BorderStyle.none,
-                      color: validate!  ? Colors.transparent: Colors.red,
+                    color: validate == true ? Colors.transparent: Colors.red,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide:  BorderSide(
                     width: 1,
-                    color: validate!  ? Colors.transparent: Colors.red,
+                    color: validate == true ? Colors.transparent: Colors.red,
                   ),
                 ),
               ),

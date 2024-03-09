@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:seventh_sem_project/module/screens/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/pages/blog.dart';
-import 'package:seventh_sem_project/module/screens/pages/home_page.dart';
+import 'package:seventh_sem_project/module/screens/pages/home_page/home_page.dart';
 import 'package:seventh_sem_project/module/screens/pages/prediction_result/prediction_result.dart';
 import 'package:seventh_sem_project/module/screens/pages/profile/profile.dart';
 

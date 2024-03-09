@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:seventh_sem_project/module/common_widget/screen_witgh_background_image.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
+import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
 
 import '../common_widget/common_text.dart';
 
@@ -18,15 +20,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     _navigateToLogin();
+    super.initState();
   }
 
   void _navigateToLogin() {
+    final pref = Get.find<SharedPreferenceDB>();
+
+    var isLoggedIn = pref.getUserName();
     Timer(
       Duration(seconds: 5),
       () {
-        Navigator.pushNamed(context, RouteConstant.routeLogin);
+          // Navigator.pushNamed(context, RouteConstant.routeLogin);
+
+        if (isLoggedIn != null) {
+          if (isLoggedIn) {
+            Navigator.pushReplacementNamed(context, RouteConstant.routeHomePage);
+          } else {
+            Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
+          }
+        } else {
+          Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
+        }
       },
     );
   }

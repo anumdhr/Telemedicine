@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
 
 import '../../../../core/check_box_repo.dart';
 import '../../../../core/phone_no_check_repo.dart';
@@ -208,6 +210,9 @@ class LoginPage extends StatelessWidget {
                         // Loader().showLoader(context);
                         _formKey.currentState!.save();
                         if (_formKey.currentState!.validate()) {
+                          final pref = Get.find<SharedPreferenceDB>();
+
+                          pref.saveUserName(true);
                           Navigator.pushNamed(context, RouteConstant.routeHomePage);
 
 
@@ -244,18 +249,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    sboxH40,
-                    InkWell(
-                      onTap: () {
-                      },
-                      child: Text(
-                        "Skip for Now",
-                        style: CustomStyle.textFullSansLcMediumItalic.copyWith(
-                          fontSize: 14,
-                          color: const Color(0xffFFFFFF),
-                        ),
-                      ),
-                    ),
+
                     sboxH30,
                   ],
                 ),
