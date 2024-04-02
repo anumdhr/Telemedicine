@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,12 +8,10 @@ import 'package:seventh_sem_project/core/phone_no_check_repo.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/common_widget/custom_button.dart';
 import 'package:seventh_sem_project/module/common_widget/custom_text_field_with_bottom_border.dart';
-import 'package:seventh_sem_project/module/common_widget/screen_witgh_background_image.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
-import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -29,7 +26,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: primaryColor,
       body: SingleChildScrollView(
         child: Center(
@@ -37,7 +33,7 @@ class LoginPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.only(top: 75, left: 30.w, right: 30.w),
             child: Column(
-              children: [git
+              children: [
                 SizedBox(
                   width: 167,
                   child: Column(
@@ -198,7 +194,7 @@ class LoginPage extends StatelessWidget {
                 CustomButton(
                   backgroundColor: Colors.white,
                   title: "Login",
-                  onTap: () => ac.onPressedLogin(context),
+                  onTap: () => ac.onPressedLogin(),
 
                   // onTap: () async {
 
