@@ -1,25 +1,28 @@
+import 'package:bot_toast/bot_toast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:seventh_sem_project/module/auth/controller/auth_controller.dart';
-import 'package:seventh_sem_project/module/auth/screen/login_page/create_account_page.dart';
-import 'package:seventh_sem_project/module/screens/main_page/main_controller.dart';
-import 'package:seventh_sem_project/module/screens/main_page/main_page.dart';
-import 'package:seventh_sem_project/module/screens/pages/heart_disease_prediction/controller.dart';
-import 'package:seventh_sem_project/module/screens/pages/home_page/home_page.dart';
-import 'package:seventh_sem_project/module/screens/pages/profile/profile_controller.dart';
+import 'package:seventh_sem_project/firebase_options.dart';
+import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
+import 'package:seventh_sem_project/module/auth/controller/register_controller.dart';
 import 'package:seventh_sem_project/module/screens/splash_screen.dart';
+import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/profile/profile_controller.dart';
 import 'package:seventh_sem_project/module/sqflite_db/sqflite_database.dart';
 import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
-
 import 'module/routes/custom_page_route_builder.dart';
 import 'module/routes/routes.dart';
-
+import 'module/screens/admin/admin_controller.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   DatabaseService().connectDb();
   await SharedPreferenceDB.init();
 
@@ -29,15 +32,19 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
-    Get.put(AuthController());
+    Get.put(RegisterController());
     Get.put(ProfileController());
     Get.put(HDPredictionController());
     Get.put(SharedPreferenceDB());
-    return MaterialApp(
+    Get.put(AdminController());
+    Get.put(AuthController());
+
+
+    final botToastBuilder = BotToastInit();
+    return GetMaterialApp(
       navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
       onGenerateInitialRoutes: (pastRoute) {
@@ -47,6 +54,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       builder: (context, child) {
+        child = botToastBuilder(context,child);
         ScreenUtil.init(
           context,
           designSize: const Size(1920, 1080),
@@ -60,7 +68,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
               fontFamily: "Full Sans LC Book",
             ),
-            child: child!);
+            child: child);
       },
       // builder: (context, child) {
       //   final botToastBuilder = BotToastInit();

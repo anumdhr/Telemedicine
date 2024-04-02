@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 import 'package:seventh_sem_project/module/utils/validator.dart';
@@ -177,6 +178,16 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                     ),
                   ),
                   sboxH20,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: primaryColor,
+                    ),
+                    child: Text("0 : Absence of Heart Disease"),
+                  ),
+                  sboxH20,
+
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:seventh_sem_project/module/screens/pages/home_page/widgets/appointment_card.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
+import 'package:seventh_sem_project/module/common_widget/common_topbar.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/home_page/widgets/appointment_card.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
@@ -88,29 +89,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello, Anu",
-                        style: customStyle,
-                      ),
-                      Text(
-                        "How are you today ?",
-                        style: TextStyle(
-                          fontFamily: "Full Sans LC Medium",
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Spacer(),
-                  CircleAvatar(radius: 30, child: SvgPicture.asset("assets/images/Notification_icon.svg"))
-                ],
-              ),
+              TopBar(),
               sboxH20,
               const CustomText(
                 "Category",
@@ -250,3 +229,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+

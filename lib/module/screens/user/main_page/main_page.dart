@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:seventh_sem_project/module/screens/main_page/main_controller.dart';
-import 'package:seventh_sem_project/module/screens/pages/blog.dart';
-import 'package:seventh_sem_project/module/screens/pages/home_page/home_page.dart';
-import 'package:seventh_sem_project/module/screens/pages/prediction_result/prediction_result.dart';
-import 'package:seventh_sem_project/module/screens/pages/profile/profile.dart';
+import 'package:logger/logger.dart';
+import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/blog.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/home_page/home_page.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/prediction_result/prediction_result.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/profile/profile.dart';
+
 
 class TelemedicineMain extends StatelessWidget {
   const TelemedicineMain({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("Alish monkey");
     List<Widget> pages = [
       const HomePage(),
       const BlogPage(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
-import 'package:seventh_sem_project/module/screens/main_page/main_controller.dart';
+import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 
 class BlogPage extends StatefulWidget {
@@ -78,12 +78,12 @@ class _BlogPageState extends State<BlogPage> {
                         ),
                         sboxH10,
                         CustomText(
-                          "title".toUpperCase(),
+                          "Blog1".toUpperCase(),
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         sboxH10,
                         CustomText(
-                          "Subtitle".toUpperCase(),
+                          "Eyes Protection".toUpperCase(),
                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         sboxH10,

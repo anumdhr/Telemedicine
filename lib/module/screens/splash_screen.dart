@@ -26,12 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToLogin() {
     final pref = Get.find<SharedPreferenceDB>();
-
     var isLoggedIn = pref.getUserName();
+
     Timer(
       Duration(seconds: 5),
       () {
-          // Navigator.pushNamed(context, RouteConstant.routeLogin);
+        // Navigator.pushNamed(context, RouteConstant.routeLogin);
 
         if (isLoggedIn != null) {
           if (isLoggedIn) {

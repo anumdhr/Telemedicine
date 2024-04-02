@@ -1,61 +1,67 @@
+// To parse this JSON data, do
+//
+//     final user = userFromJson(jsonString);
+
+import 'dart:convert';
+
+NewUserModel userFromJson(String str) => NewUserModel.fromJson(json.decode(str));
+
+String userToJson(NewUserModel data) => json.encode(data.toJson());
+
 class NewUserModel {
-  String? name;
+  String? firstname;
+  String? lastname;
   String? email;
   String? password;
-  String? phone;
-  String? gender;
-  String? address;
   String? confirmPassword;
+  String? role;
+  String? phone;
 
   NewUserModel({
-    this.name,
-    this.password,
-    this.address,
+    this.firstname,
+    this.lastname,
     this.email,
-    this.gender,
-    this.phone,
+    this.password,
     this.confirmPassword,
+    this.role,
+    this.phone,
   });
 
-  factory NewUserModel.fromJson(Map<String, dynamic> json) =>
-      NewUserModel(
-        name: json["name"],
-        password: json["password"],
-        address: json["address"],
-        email: json["email"],
-        gender: json["gender"],
-        phone: json["phone"],
-        confirmPassword: json["confirmPassword"],
-      );
-
-  Map<String, dynamic> toJson() {
-    return {
-      "name": name,
-      "email": email,
-      "password": password,
-      "phone": phone,
-      "gender": gender,
-      "address": address,
-    };
-  }
-
   NewUserModel copyWith({
-    String? name,
+    String? firstname,
+    String? lastname,
     String? email,
     String? password,
-    String? phone,
-    String? gender,
-    String? address,
     String? confirmPassword,
-  }) {
-    return NewUserModel(
-      name: name ?? this.name,
-      address: address ?? this.address,
-      email: email ?? this.email,
-      gender: gender ?? this.gender,
-      phone: phone ?? this.phone,
-      password: password ?? this.password,
-      confirmPassword: confirmPassword ?? this.confirmPassword,
-    );
-  }
+    String? role,
+    String? phone,
+  }) =>
+      NewUserModel(
+        firstname: firstname ?? this.firstname,
+        lastname: lastname ?? this.lastname,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        confirmPassword: confirmPassword ?? this.confirmPassword,
+        role: role ?? this.role,
+        phone: phone ?? this.phone,
+      );
+
+  factory NewUserModel.fromJson(Map<String, dynamic> json) => NewUserModel(
+        firstname: json["firstname"],
+        lastname: json["lastname"],
+        email: json["email"],
+        password: json["password"],
+        confirmPassword: json["confirmPassword"],
+        role: json["role"],
+        phone: json["phone"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "firstname": firstname,
+        "lastname": lastname,
+        "email": email,
+        "password": password,
+        "role": role,
+        "phone": phone,
+      };
 }

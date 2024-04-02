@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
-import 'package:seventh_sem_project/module/screens/pages/heart_disease_prediction/controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/controller.dart';
 import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 
@@ -121,7 +121,7 @@ class _PredictionResultState extends State<PredictionResult> {
                             ),
                             sboxH20,
                             CustomText(
-                              "Results",
+                              "Results    0 : Absense of Heart Disease",
                               style: CustomStyle.textFullSansLcBook.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,

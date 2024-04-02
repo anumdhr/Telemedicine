@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "70421291826",
+    "project_id": "fir-seventhsem",
+    "storage_bucket": "fir-seventhsem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70421291826:android:4d696d88133185fbd72d2b",
+        "android_client_info": {
+          "package_name": "com.example.seventh_sem_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-q2-XFVH3n3Ss7qg9XHpdIJNtbP32trc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

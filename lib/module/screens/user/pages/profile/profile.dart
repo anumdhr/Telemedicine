@@ -1,15 +1,14 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
 import 'package:seventh_sem_project/module/common_widget/info_field.dart';
-import 'package:seventh_sem_project/module/screens/pages/profile/profile_controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/profile/profile_controller.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
-import 'dart:io';
-
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
 import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart'; // Import the dart:io library
 
@@ -45,8 +44,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 GestureDetector(
                     onTap: () {
+                      FirebaseAuth.instance.signOut();
                       final pref = Get.find<SharedPreferenceDB>();
                       pref.saveUserName(false);
+
+
 
                       Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
                     },
@@ -130,13 +132,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         InfoField(
                           controller: pc.addressController,
-                          title: "Address",
-                          hintText: "Banepa, Kavrepalanchowk",
+                          title: "Email",
+                          hintText: "anumdr3@gmail.com",
                         ),
                         InfoField(
                           controller: pc.genderController,
-                          title: "Gender",
-                          hintText: "Female",
+                          title: "Role",
+                          hintText: "User",
                         ),
                         sboxH35,
                         // const Spacer(),
