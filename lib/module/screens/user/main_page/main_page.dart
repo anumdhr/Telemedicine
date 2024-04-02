@@ -2,27 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:logger/logger.dart';
 import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/blog.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/home_page/home_page.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/prediction_result/prediction_result.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/profile/profile.dart';
 
-
-class TelemedicineMain extends StatelessWidget {
+class TelemedicineMain extends StatefulWidget {
   const TelemedicineMain({super.key});
 
   @override
+  State<TelemedicineMain> createState() => _TelemedicineMainState();
+}
+
+class _TelemedicineMainState extends State<TelemedicineMain> {
+  List<Widget> pages = [
+    const HomePage(),
+    const BlogPage(),
+    const PredictionResult(),
+    ProfilePage(),
+  ];
+
+  final hc = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    hc.index.value = 0;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Logger().d("Alish monkey");
-    List<Widget> pages = [
-      const HomePage(),
-      const BlogPage(),
-      const PredictionResult(),
-      ProfilePage(),
-    ];
-    final hc = Get.find<HomeController>();
     return Scaffold(
         body: Obx(() {
           return pages[hc.index.value];
@@ -44,7 +54,7 @@ class TelemedicineMain extends StatelessWidget {
                   },
                   selectedIndex: hc.index.value,
                   tabs: const [
-                    GButton(icon: Icons.home, text: "Home"),
+                    GButton(icon: Icons.home, text: "Home",),
                     GButton(
                       icon: FontAwesomeIcons.blog,
                       text: "Blog",

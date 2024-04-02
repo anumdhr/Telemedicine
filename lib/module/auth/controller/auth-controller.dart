@@ -24,39 +24,36 @@ class AuthController extends GetxController {
   final ar = AuthRepository();
   final FirebaseService auth = FirebaseService();
 
-  void onPressedLogin(BuildContext ctx) async {
+  void onPressedLogin() async {
     if (kDebugMode) {
       // emailController.text = 'soojho22@gmail.com';
       // passwordController.text = 'Anuumdhr12';
     }
     formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
-      Get.dialog(Container(
-        color: Colors.black.withOpacity(0.4),
-        child: const Center(
-          child: CircularProgressIndicator(
-            color: Colors.red,
+      Get.dialog(
+        Container(
+          color: Colors.black.withOpacity(0.4),
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+            ),
           ),
         ),
-      ));
+      );
       try {
         User? user = await auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
-        Logger().d(user == null);
         if (user != null) {
-          Logger().d("fkdjakf");
-          Get.close(1);
-          Navigator.push(ctx,MaterialPageRoute(builder: (context) => HeartDiseasePredictionPage(),));
-          // Navigator.pushNamed(context, RouteConstant.routeHomePage);
-          // Get.to(() => const HeartDiseasePredictionPage());
+          Get.close(1); // Close the progress indicator
+          Get.offAll(() => const TelemedicineMain()); // Navigate to the HeartDiseasePredictionPage
           Get.snackbar(
-            '11111',
-            'Please .',
-            backgroundColor: Colors.red,
+            'Login Successful',
+            'Welcome back!',
+            backgroundColor: Colors.green,
             colorText: Colors.white,
           );
-          Logger().d("fkdjakf");
-
         } else {
+          Get.close(1); // Close the progress indicator
           Get.snackbar(
             'Authentication Failed',
             'Please use the correct username and password.',
@@ -65,21 +62,17 @@ class AuthController extends GetxController {
           );
         }
 
-        // emailController.clear();
-        // passwordController.clear();
-
         final pref = Get.find<SharedPreferenceDB>();
         pref.saveUserName(true);
       } catch (e) {
-        Logger().e("Error: $e");
+        Get.close(1); // Close the progress indicator
         Get.snackbar(
           'Error',
           'An error occurred during login. Please try again later.',
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-      } finally {
-        Get.close(1); // Close the progress indicator
+        Logger().e("Error: $e");
       }
     }
   }

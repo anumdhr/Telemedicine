@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
       onGenerateInitialRoutes: (pastRoute) {
-        return [CustomPageRouteBuilder(widget: SplashScreen())];
+        return [CustomPageRouteBuilder(widget: const SplashScreen())];
       },
 
       debugShowCheckedModeBanner: false,

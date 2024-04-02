@@ -194,7 +194,7 @@ class LoginPage extends StatelessWidget {
                 CustomButton(
                   backgroundColor: Colors.white,
                   title: "Login",
-                  onTap: () => ac.onPressedLogin(context),
+                  onTap: () => ac.onPressedLogin(),
 
                   // onTap: () async {
 
