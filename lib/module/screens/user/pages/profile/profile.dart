@@ -43,25 +43,24 @@ class _ProfilePageState extends State<ProfilePage> {
                     "Profile".toUpperCase(),
                     style: customStyle1,
                   ),
-                  InkWell(
-                      onTap: () {
-                        FirebaseAuth.instance.signOut();
-                        final pref = Get.find<SharedPreferenceDB>();
-                        pref.saveUserName(false);
-
-
-
-                        Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.logout),
-                          CustomText(
-                            "Logout",
-                            style: CustomStyle.textFullSansLcBook.copyWith(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
-                          ),
-                        ],
-                      ))
+                  Container(),
+                  // InkWell(
+                  //     onTap: () {
+                  //       FirebaseAuth.instance.signOut();
+                  //       final pref = Get.find<SharedPreferenceDB>();
+                  //       pref.saveUserName(false);
+                  //
+                  //       Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
+                  //     },
+                  //     child: Row(
+                  //       children: [
+                  //         Icon(Icons.logout),
+                  //         CustomText(
+                  //           "Logout",
+                  //           style: CustomStyle.textFullSansLcBook.copyWith(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                  //         ),
+                  //       ],
+                  //     ))
                 ],
               ),
               sboxH12,
@@ -175,7 +174,13 @@ class _ProfilePageState extends State<ProfilePage> {
                               //
                               Expanded(
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    FirebaseAuth.instance.signOut();
+                                    final pref = Get.find<SharedPreferenceDB>();
+                                    pref.saveUserName(false);
+
+                                    Navigator.pushReplacementNamed(context, RouteConstant.routeLogin);
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(vertical: 9),
                                     width: double.infinity,
@@ -188,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 2),
                                         child: Text(
-                                          "Exit",
+                                          "Logout",
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: "Full Sans LC Book",

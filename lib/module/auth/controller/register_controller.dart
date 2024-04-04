@@ -23,6 +23,7 @@ class RegisterController extends GetxController {
   final phoneController = TextEditingController();
   final formKey = GlobalKey<FormBuilderState>();
 
+
   var validateFirstName = true.obs;
   var validatePassword = true.obs;
   var validateConfirmPassword = true.obs;

@@ -34,4 +34,21 @@ class FirebaseService {
     }
     return null;
   }
+
+  Future<Map<String, dynamic>?> getUserData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot =
+      await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+      if (snapshot.exists) {
+        return snapshot.data();
+      } else {
+        print('Document does not exist');
+        return null;
+      }
+    } catch (e) {
+      print('Error getting document: $e');
+      return null;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,27 @@ class AuthController extends GetxController {
       try {
         User? user = await auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
         if (user != null) {
-          Get.close(1); // Close the progress indicator
-          Get.offAll(() => const TelemedicineMain()); // Navigate to the HeartDiseasePredictionPage
+          DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+          Map<String, dynamic>? userData = userSnapshot.data() as Map<String, dynamic>?;
+          NewUserModel userModel = NewUserModel(
+            firstname: userData?['firstname'],
+            lastname: userData?['lastname'],
+            email: userData?['email'],
+            password: userData?['password'],
+            confirmPassword: userData?['confirmPassword'],
+            role: userData?['role'],
+            phone: userData?['phone'],
+          );
+          Logger().d(userModel);
+          String? role = userData?['role'];
+          Logger().d(role);
+          Get.close(1);
+          if (role == 'Doctor') {
+            Get.offAll(() =>  AdminHomePage());
+          } else {
+            Get.offAll(() => const TelemedicineMain());
+          }// Close the progress indicator
+          // Get.offAll(() => const TelemedicineMain()); // Navigate to the HeartDiseasePredictionPage
           Get.snackbar(
             'Login Successful',
             'Welcome back!',
