@@ -2,22 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:seventh_sem_project/module/screens/admin/admin_controller.dart';
-import 'package:seventh_sem_project/module/screens/admin/admin_home_page.dart';
+import 'package:seventh_sem_project/module/screens/admin/doctor_controller.dart';
+import 'package:seventh_sem_project/module/screens/admin/screens/doctor_home_page.dart';
 
-class AdminMain extends StatelessWidget {
+import 'screens/doctor_profile_page.dart';
+
+class AdminMain extends StatefulWidget {
   const AdminMain({super.key});
 
   @override
+  State<AdminMain> createState() => _AdminMainState();
+}
+
+
+class _AdminMainState extends State<AdminMain> {
+  List<Widget> pages = [
+    AdminHomePage(),
+    DoctorProfilePage(),
+  ];
+  final dc = Get.find<DoctorController>();
+  @override
+  void initState() {
+
+    dc.index.value = 0;
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [
-       AdminHomePage(),
-       AdminHomePage(),
-    ];
-    final ac = Get.find<AdminController>();
+
     return Scaffold(
         body: Obx(() {
-          return pages[ac.index.value];
+          return pages[dc.index.value];
         }),
         bottomNavigationBar: Container(
           color: const Color(0xff7be495),
@@ -32,9 +48,9 @@ class AdminMain extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   tabBackgroundColor: Colors.deepPurple.withOpacity(0.50),
                   onTabChange: (value) {
-                    ac.index.value = value;
+                    dc.index.value = value;
                   },
-                  selectedIndex: ac.index.value,
+                  selectedIndex: dc.index.value,
                   tabs: const [
                     GButton(icon: Icons.home, text: "Home"),
                     GButton(

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
-import 'package:seventh_sem_project/module/sqflite_db/database_model.dart';
-import 'package:seventh_sem_project/module/sqflite_db/sqflite_database.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/sqflite_db/database_model.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/sqflite_db/sqflite_database.dart';
 
 class HDPredictionController extends GetxController {
   TextEditingController ageController = TextEditingController();

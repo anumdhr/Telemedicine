@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/blog.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/home_page/home_page.dart';

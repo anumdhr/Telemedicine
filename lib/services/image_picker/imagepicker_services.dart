@@ -3,10 +3,10 @@ import 'package:image_picker/image_picker.dart';
 class ImagePickerServices {
   static final ImagePicker picker = ImagePicker();
 
-  Future<String?> uploadImageByGallery() async {
+  Future<XFile?> uploadImageByGallery() async {
     final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
     if (photo != null) {
-      return photo.path;
+      return photo;
     } else {
       return null;
     }

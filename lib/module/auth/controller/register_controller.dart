@@ -21,7 +21,6 @@ class RegisterController extends GetxController {
 
   final roleController = TextEditingController();
   final phoneController = TextEditingController();
-  final formKey = GlobalKey<FormBuilderState>();
 
 
   var validateFirstName = true.obs;
@@ -105,8 +104,9 @@ class RegisterController extends GetxController {
       );
       if (user != null) {
         BotToast.showText(text: 'Register in successfully.', contentColor: Colors.green);
+        Get.toNamed(RouteConstant.routeLogin);
 
-        Navigator.pushNamed(context, RouteConstant.routeLogin);
+        // Navigator.pushNamed(context, RouteConstant.routeLogin);
       } else {
         print("Not able to sign up");
       }

@@ -6,15 +6,16 @@ import 'package:get/get.dart';
 import 'package:seventh_sem_project/firebase_options.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/auth/controller/register_controller.dart';
+import 'package:seventh_sem_project/module/auth/screen/local_database/auth_sqf_lite_database.dart';
 import 'package:seventh_sem_project/module/screens/splash_screen.dart';
 import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/controller.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/sqflite_db/sqflite_database.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/profile/profile_controller.dart';
-import 'package:seventh_sem_project/module/sqflite_db/sqflite_database.dart';
 import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart';
 import 'module/routes/custom_page_route_builder.dart';
 import 'module/routes/routes.dart';
-import 'module/screens/admin/admin_controller.dart';
+import 'module/screens/admin/doctor_controller.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
@@ -24,6 +25,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   DatabaseService().connectDb();
+  LoginDatabaseServices().connectDb();
   await SharedPreferenceDB.init();
 
   runApp(const MyApp());
@@ -34,13 +36,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(AuthController());
+
     Get.put(HomeController());
     Get.put(RegisterController());
     Get.put(ProfileController());
     Get.put(HDPredictionController());
     Get.put(SharedPreferenceDB());
-    Get.put(AdminController());
-    Get.put(AuthController());
+    Get.put(DoctorController());
 
 
     final botToastBuilder = BotToastInit();

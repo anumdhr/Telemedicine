@@ -15,6 +15,7 @@ import 'package:seventh_sem_project/module/utils/route_constant.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
+
   final _hidePassword = BehaviorSubject<bool>.seeded(true);
 
   final checkBox = CheckboxRepo(initialState: false);
@@ -22,9 +23,12 @@ class LoginPage extends StatelessWidget {
   final _rememberMe = BehaviorSubject<bool>.seeded(false);
 
   final ac = Get.find<AuthController>();
+  final formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: SingleChildScrollView(
@@ -69,7 +73,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 sboxH32,
                 Form(
-                  key: ac.formKey,
+                  key: formKey,
                   child: Column(
                     children: [
                       CustomTextFieldWithBottomBorder(
@@ -94,9 +98,6 @@ class LoginPage extends StatelessWidget {
                         attribute: "email",
                         suffixIconUrl: "assets/images/user.svg",
                         suffixIconColor: Colors.white,
-                        // onChange: (value) {
-                        //   numberCheckRepo.onCheckNumber(number: value);
-                        // },
                       ),
                       sboxH30,
                       StreamBuilder<bool>(
@@ -139,77 +140,11 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 sboxH20,
-                Row(
-                  children: [
-                    SizedBox(
-                        height: 10.0,
-                        width: 10.0,
-                        child: StreamBuilder<bool>(
-                          stream: _rememberMe.stream,
-                          builder: (context, snapshot) {
-                            return Checkbox(
-                              checkColor: Colors.black,
-                              activeColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                              side: const BorderSide(
-                                color: Colors.white,
-                              ),
-                              value: snapshot.data ?? false,
-                              onChanged: (val) {
-                                _rememberMe.sink.add(val!);
-                              },
-                            );
-                          },
-                        )),
-                    sboxW15,
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text("Remember me",
-                          style: CustomStyle.textFullSansLcBook.copyWith(
-                            color: Colors.white,
-                            fontSize: 14,
-                          )),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigator.pushNamed(context, RouteConstant.routeForgotPassword);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          "Forgot Password ?",
-                          style: CustomStyle.textFullSansLcLightItalic.copyWith(
-                            color: const Color(0xffFFFFFF),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                //Forgot Password Section End
-                sboxH40,
                 //Login Container Start
                 CustomButton(
                   backgroundColor: Colors.white,
                   title: "Login",
-                  onTap: () => ac.onPressedLogin(),
-
-                  // onTap: () async {
-
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => SocketPage(),));
-                  // Loader().showLoader(context);
-                  // _formKey.currentState!.save();
-                  // if (_formKey.currentState!.validate()) {
-                  //   final pref = Get.find<SharedPreferenceDB>();
-                  //
-                  //   pref.saveUserName(true);
-                  //   Navigator.pushNamed(context, RouteConstant.routeHomePage);
-                  //
-                  //
-                  // }
-                  // },
+                  onTap: () => ac.onPressedLogin(formKey),
                 ),
                 //Login Section End
                 //Register Section Start
@@ -229,7 +164,6 @@ class LoginPage extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(context, RouteConstant.routeRegister);
 
-                        // Navigator.pushNamed(context, RouteConstant.routeRegister);
                       },
                       child: Text(
                         "Register Now",

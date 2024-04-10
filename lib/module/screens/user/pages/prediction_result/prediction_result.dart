@@ -23,122 +23,127 @@ class _PredictionResultState extends State<PredictionResult> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: SingleChildScrollView(
-      child: Obx(
-         () {
-          return Column(
-            children: [
-              Text(
-                "Results".toUpperCase(),
-                style: CustomStyle.textFullSansLcBook.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              sboxH10,
-              ListView.builder(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                // itemCount: 10,
-                itemCount: dc.heartDiseaseList.length,
-                itemBuilder: (context, index) {
+    if(dc.heartDiseaseList.isEmpty){
+     return Center(child: Text("No list to display."));
+    }else{
+      return SafeArea(
+          child: SingleChildScrollView(
+            child: Obx(
+                    () {
                   return Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
+                      Text(
+                        "Results".toUpperCase(),
+                        style: CustomStyle.textFullSansLcBook.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    child: Image.asset(
-                                      "assets/images/heart_pulse1.jpg",
-                                      fit: BoxFit.cover,
+                      ),
+                      sboxH10,
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        // itemCount: 10,
+                        itemCount: dc.heartDiseaseList.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: Image.asset(
+                                              "assets/images/heart_pulse1.jpg",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        sboxW8,
+                                        Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              CustomText("Age:${dc.heartDiseaseList[index].age}"),
+                                              sboxH5,
+                                              CustomText("Heart Rate:${dc.heartDiseaseList[index].heartRate}"),
+                                              sboxH5,
+                                              CustomText("Sugar:${dc.heartDiseaseList[index].sugar}"),
+                                              sboxH5,
+                                            ],
+                                          ),
+                                        ),
+                                        sboxW8,
+                                        Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              CustomText(
+                                                "Cholestrol:${dc.heartDiseaseList[index].cholestrol}",
+                                                style: TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              sboxH5,
+                                              CustomText(
+                                                "Blood Pressure:${dc.heartDiseaseList[index].bloodPressure}",
+                                                style: TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              sboxH5,
+                                              CustomText("Chest:${dc.heartDiseaseList[index].chest}"),
+                                              sboxH5,
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                                sboxW8,
-                                Expanded(
-                                  flex: 4,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText("Age:${dc.heartDiseaseList[index].age}"),
-                                      sboxH5,
-                                      CustomText("Heart Rate:${dc.heartDiseaseList[index].heartRate}"),
-                                      sboxH5,
-                                      CustomText("Sugar:${dc.heartDiseaseList[index].sugar}"),
-                                      sboxH5,
-                                    ],
-                                  ),
-                                ),
-                                sboxW8,
-                                Expanded(
-                                  flex: 4,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText(
-                                        "Cholestrol:${dc.heartDiseaseList[index].cholestrol}",
-                                        style: TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
+                                    CustomText(
+                                      "Date:${dc.heartDiseaseList[index].dateTime}",
+                                      style: CustomStyle.textFullSansLcBook.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
                                       ),
-                                      sboxH5,
-                                      CustomText(
-                                        "Blood Pressure:${dc.heartDiseaseList[index].bloodPressure}",
-                                        style: TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
+                                    ),
+                                    sboxH20,
+                                    CustomText(
+                                      "Results    0 : Absense of Heart Disease",
+                                      style: CustomStyle.textFullSansLcBook.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
                                       ),
-                                      sboxH5,
-                                      CustomText("Chest:${dc.heartDiseaseList[index].chest}"),
-                                      sboxH5,
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            CustomText(
-                              "Date:${dc.heartDiseaseList[index].dateTime}",
-                              style: CustomStyle.textFullSansLcBook.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10,
-                              ),
-                            ),
-                            sboxH20,
-                            CustomText(
-                              "Results    0 : Absense of Heart Disease",
-                              style: CustomStyle.textFullSansLcBook.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ).paddingSymmetric(horizontal: 5),
-                      sboxH20,
+                              ).paddingSymmetric(horizontal: 5),
+                              sboxH20,
+                            ],
+                          );
+                        },
+                      )
                     ],
                   );
-                },
-              )
-            ],
-          );
-        }
-      ),
-    ));
+                }
+            ),
+          ));
+
+    }
   }
 }

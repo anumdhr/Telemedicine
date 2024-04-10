@@ -13,16 +13,16 @@ import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
 import 'package:seventh_sem_project/services/shared_preferences/shared_pref.dart'; // Import the dart:io library
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class DoctorProfilePage extends StatefulWidget {
+  const DoctorProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<DoctorProfilePage> createState() => _DoctorProfilePageState();
 }
 
 // Your existing code...
 
-class _ProfilePageState extends State<ProfilePage> {
+class _DoctorProfilePageState extends State<DoctorProfilePage> {
   final pc = Get.find<ProfileController>();
   final ac = Get.find<AuthController>();
 
@@ -72,24 +72,24 @@ class _ProfilePageState extends State<ProfilePage> {
                     pc.onPhotoUploaded();
                   },
                   child: Obx(
-                    () {
+                        () {
                       return pc.imageUrl.toString() == ''
                           ? CircleAvatar(
-                              backgroundColor: primaryColor,
-                              radius: 40,
-                              backgroundImage: AssetImage("assets/images/doctor_photo.jpg"),
-                            )
+                        backgroundColor: primaryColor,
+                        radius: 40,
+                        backgroundImage: AssetImage("assets/images/doctor_photo.jpg"),
+                      )
                           : SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: Image.file(
-                                  File(pc.imageUrl.value), // Get the path from XFile
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
+                        height: 80,
+                        width: 80,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.file(
+                            File(pc.imageUrl.value), // Get the path from XFile
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),

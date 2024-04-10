@@ -1,8 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
 import 'package:seventh_sem_project/module/common_widget/common_topbar.dart';
+import 'package:seventh_sem_project/module/screens/admin/doctor_controller.dart';
+import 'package:seventh_sem_project/module/screens/admin/firebase_doctor_info/profile_model.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/home_page/widgets/appointment_card.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
@@ -16,6 +22,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ac = Get.find<AuthController>();
+  final dc = Get.find<DoctorController>();
+
   List<Map<String, dynamic>> specialist = [
     {
       "icon": FontAwesomeIcons.userDoctor,
@@ -75,7 +84,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  bool isToggle = false;
+  @override
+  void initState() {
+
+    ac.isToggle.value = false;
+    Logger().d("lenth is ${dc.doctorProfileList.length}");
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,80 +164,118 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        isToggle = !isToggle!;
+                        ac.isToggle.value = !ac.isToggle.value!;
                       });
                     },
                     child: CustomText(
-                      isToggle == false ? "View More" : "View Less",
+                      ac.isToggle.value == false ? "View More" : "View Less",
                     ),
                   ),
                 ],
               ),
               sboxH20,
 
-              ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 15,
-                ),
-                scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: isToggle ? 20 : 2,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    // height: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.33,
-                          child: Image.asset("assets/images/doctor_photo.jpg"),
+              FutureBuilder<List<DoctorProfileModel>>(
+                  future: dc.getDoctorProfile(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    } else if (snapshot.hasData) {
+                      final doctorProfileList = snapshot.data!;
+                      return ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 15,
                         ),
-                        sboxW10,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const CustomText(
-                              "Dr Aruna",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: doctorProfileList.length,
+                        // itemCount: isToggle ? dc.doctorProfileList.length : 2,
+                        itemBuilder: (context, index) {
+                          Logger().d(doctorProfileList.length);
+
+                          return Container(
+                            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            // height: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
                             ),
-                            const CustomText(
-                              "Cardiologist",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            sboxH20,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                const Icon(
-                                  Icons.star_border,
-                                  color: Colors.yellow,
-                                  size: 16,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 90,
+                                  width: MediaQuery.of(context).size.width * 0.33,
+                                  child: Image.network(dc.doctorProfileList[index].image!,
+                                  ),
                                 ),
-                                sboxW15,
-                                const Text('4.5'),
-                                sboxW15,
-                                const Text('Reviews'),
-                                const Text('(20)'),
+                                sboxW10,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      "${doctorProfileList[index].firstName} ${doctorProfileList[index].lastName}",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    CustomText(
+                                      "${doctorProfileList[index].specialization}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    sboxH20,
+                                    CustomText(
+                                      "${doctorProfileList[index].visitingTime}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    CustomText(
+                                      "${doctorProfileList[index].workingHospital}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.start,
+                                    //   children: <Widget>[
+                                    //     const Icon(
+                                    //       Icons.star_border,
+                                    //       color: Colors.yellow,
+                                    //       size: 16,
+                                    //     ),
+                                    //     sboxW15,
+                                    //     const Text('4.5'),
+                                    //     sboxW15,
+                                    //     const Text('Reviews'),
+                                    //     const Text('(20)'),
+                                    //   ],
+                                    // ),
+                                  ],
+                                )
                               ],
                             ),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ), // ListView.builder(
+                          );
+                        },
+                      );
+                    }else{
+                      return const Center(
+                        child: Text('No data available'),
+                      );
+                    }
+                  }), // ListView.builder(
             ],
           ),
         ),
@@ -229,4 +283,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

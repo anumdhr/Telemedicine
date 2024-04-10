@@ -13,7 +13,7 @@ class ProfileController extends GetxController{
     final response = await ImagePickerServices().uploadImageByGallery();
     if (response != null) {
       imageUrl.value = '';
-      imageUrl(response);
+      imageUrl(response.path!);
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:logger/logger.dart';
 import 'package:path/path.dart';
-import 'package:seventh_sem_project/module/sqflite_db/database_model.dart';
+import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/sqflite_db/database_model.dart';
 import 'package:sqflite/sqflite.dart';
 String tableName = 'tdb';
 class DatabaseService {
