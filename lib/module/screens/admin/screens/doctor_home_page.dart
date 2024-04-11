@@ -83,6 +83,7 @@ class _AddBlogState extends State<AddBlog> {
   bc.blogFile = null;
   super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
