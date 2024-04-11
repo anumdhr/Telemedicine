@@ -1,12 +1,10 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:seventh_sem_project/module/auth/auth_repository/register_repository.dart';
 import 'package:seventh_sem_project/module/auth/model/user_model.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:seventh_sem_project/module/utils/route_constant.dart';
 import 'package:seventh_sem_project/services/firebase_auth_implementation/firebase_auth.dart';
 
@@ -33,7 +31,6 @@ class RegisterController extends GetxController {
 
   final userModeList = <NewUserModel>[].obs;
   final newUserModel = NewUserModel().obs;
-  final rr = RegisterRepository();
   final FirebaseService auth = FirebaseService();
 
   void onFirstNameChange({required String name}) {

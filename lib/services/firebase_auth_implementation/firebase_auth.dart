@@ -12,6 +12,18 @@ class FirebaseService {
       if (credential.user != null) {
         // Store additional user data in Firestore
         await FirebaseFirestore.instance.collection('users').doc(credential.user!.uid).set(newUserModel.toJson());
+        CollectionReference predictionsCollection = FirebaseFirestore.instance.collection('users').doc(credential.user!.uid).collection('predictions');
+
+        // Add an initial prediction document to the subcollection
+        // await predictionsCollection.add({
+        //   'age': 0,
+        //   'sex': 0,
+        //   'chestPainType': 0,
+        //   'bp': 0,
+        //   'cholesterol': 0,
+        //   'dateTime': Timestamp.now(),
+        //   'prediction': '0 : Absence of Heart Disease',
+        // });
       }
 
       return credential.user;
@@ -37,8 +49,7 @@ class FirebaseService {
 
   Future<Map<String, dynamic>?> getUserData(String userId) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await FirebaseFirestore.instance.collection('users').doc(userId).get();
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
       if (snapshot.exists) {
         return snapshot.data();

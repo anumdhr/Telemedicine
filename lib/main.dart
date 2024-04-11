@@ -24,7 +24,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  DatabaseService().connectDb();
+  // DatabaseService().connectDb();
   LoginDatabaseServices().connectDb();
   await SharedPreferenceDB.init();
 

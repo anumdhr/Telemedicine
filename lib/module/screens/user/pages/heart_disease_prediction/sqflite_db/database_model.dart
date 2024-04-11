@@ -1,87 +1,67 @@
-class DatabaseModel {
-  int? id;
+// To parse this JSON data, do
+//
+//     final predictionModel = predictionModelFromJson(jsonString);
 
-  final int age;
-  final int sex;
-  final int chest;
-  final int bloodPressure;
-  final int cholestrol;
-  final int sugar;
-  final int heartRate;
-  final String dateTime;
+import 'dart:convert';
 
-  DatabaseModel({
-    this.id,
+PredictionModel predictionModelFromJson(String str) => PredictionModel.fromJson(json.decode(str));
 
-    required this.dateTime,
-    required this.age,
-    required this.sex,
-    required this.chest,
-    required this.bloodPressure,
-    required this.cholestrol,
-    required this.sugar,
-    required this.heartRate,
+String predictionModelToJson(PredictionModel data) => json.encode(data.toJson());
+
+class PredictionModel {
+  int? age;
+  int? sex;
+  int? chestPainType;
+  int? bp;
+  int? cholesterol;
+  String? dateTime;
+  String? prediction;
+
+  PredictionModel({
+    this.age,
+    this.sex,
+    this.chestPainType,
+    this.bp,
+    this.cholesterol,
+    this.dateTime,
+    this.prediction,
   });
-  DatabaseModel copyWith({int? age, int? sex, int? chest, int? bloodPressure, int? cholestrol, int? sugar, int? heartRate, String? dateTime}) {
-    return DatabaseModel(
-      dateTime: dateTime ?? this.dateTime,
-      age: age ?? this.age,
-      sex: sex ?? this.sex,
-      chest: chest ?? this.chest,
-      bloodPressure: bloodPressure ?? this.bloodPressure,
-      cholestrol: cholestrol ?? this.cholestrol,
-      sugar: sugar ?? this.sugar,
-      heartRate: heartRate ?? this.heartRate,
-    );
-  }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'age': age,
-      'sex': sex,
-      'chest': chest,
-      'bloodPressure': bloodPressure,
-      'cholestrol': cholestrol,
-      'sugar': sugar,
-      'heartRate': heartRate,
-      'dateTime': dateTime,
-    };
-  }
+  PredictionModel copyWith({
+    int? age,
+    int? sex,
+    int? chestPainType,
+    int? bp,
+    int? cholesterol,
+    String? dateTime,
+    String? prediction,
+  }) =>
+      PredictionModel(
+        age: age ?? this.age,
+        sex: sex ?? this.sex,
+        chestPainType: chestPainType ?? this.chestPainType,
+        bp: bp ?? this.bp,
+        cholesterol: cholesterol ?? this.cholesterol,
+        dateTime: dateTime ?? this.dateTime,
+        prediction: prediction ?? this.prediction,
+      );
+
+  factory PredictionModel.fromJson(Map<String, dynamic> json) => PredictionModel(
+    age: json["Age"],
+    sex: json["Sex"],
+    chestPainType: json["Chest pain type"],
+    bp: json["BP"],
+    cholesterol: json["Cholesterol"],
+    dateTime: json["dateTime"],
+    prediction: json["prediction "],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Age": age,
+    "Sex": sex,
+    "Chest pain type": chestPainType,
+    "BP": bp,
+    "Cholesterol": cholesterol,
+
+  };
 }
-// class HeartDiseaseModel {
-//   int? id;
-//   final int age;
-//   final int sex;
-//   final int chest;
-//   final int bloodPressure;
-//   final int cholestrol;
-//   final int sugar;
-//   final int heartRate;
-//   final String dateTime;
-//
-//   HeartDiseaseModel({
-//     this.id,
-//     required this.dateTime,
-//     required this.age,
-//     required this.sex,
-//     required this.chest,
-//     required this.bloodPressure,
-//     required this.cholestrol,
-//     required this.sugar,
-//     required this.heartRate,
-//   });
-//
-//   HeartDiseaseModel copyWith({int? age, int? sex, int? chest, int? bloodPressure, int? cholestrol, int? sugar, int? heartRate, String? dateTime}) {
-//     return HeartDiseaseModel(
-//       dateTime: dateTime ?? this.dateTime,
-//       age: age ?? this.age,
-//       sex: sex ?? this.sex,
-//       chest: chest ?? this.chest,
-//       bloodPressure: bloodPressure ?? this.bloodPressure,
-//       cholestrol: cholestrol ?? this.cholestrol,
-//       sugar: sugar ?? this.sugar,
-//       heartRate: heartRate ?? this.heartRate,
-//     );
-//   }
-// }
-

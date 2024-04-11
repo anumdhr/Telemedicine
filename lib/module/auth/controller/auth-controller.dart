@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:seventh_sem_project/module/auth/auth_repository/auth_repo.dart';
 import 'package:seventh_sem_project/module/auth/screen/local_database/auth_sqf_lite_database.dart';
 import 'package:seventh_sem_project/module/auth/screen/local_database/models.dart';
 import 'package:seventh_sem_project/module/screens/admin/doctor_main_page.dart';
@@ -17,7 +16,6 @@ class AuthController extends GetxController {
   final TextEditingController roleController = TextEditingController();
   final LoginDatabaseServices loginDatabaseServices = LoginDatabaseServices();
 
-  final ar = AuthRepository();
   late var updatedModel = LoginDatabaseModel();
   final FirebaseService auth = FirebaseService();
   late String uid;

@@ -17,7 +17,7 @@ class _PredictionResultState extends State<PredictionResult> {
 
   @override
   void initState() {
-    dc.readNote();
+    // dc.readNote();
     super.initState();
   }
 
@@ -81,10 +81,7 @@ class _PredictionResultState extends State<PredictionResult> {
                                             children: [
                                               CustomText("Age:${dc.heartDiseaseList[index].age}"),
                                               sboxH5,
-                                              CustomText("Heart Rate:${dc.heartDiseaseList[index].heartRate}"),
-                                              sboxH5,
-                                              CustomText("Sugar:${dc.heartDiseaseList[index].sugar}"),
-                                              sboxH5,
+
                                             ],
                                           ),
                                         ),
@@ -95,20 +92,20 @@ class _PredictionResultState extends State<PredictionResult> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                                "Cholestrol:${dc.heartDiseaseList[index].cholestrol}",
+                                                "Cholestrol",
                                                 style: TextStyle(
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               sboxH5,
                                               CustomText(
-                                                "Blood Pressure:${dc.heartDiseaseList[index].bloodPressure}",
+                                                "Blood Pressure:",
                                                 style: TextStyle(
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               sboxH5,
-                                              CustomText("Chest:${dc.heartDiseaseList[index].chest}"),
+                                              CustomText("Chest:"),
                                               sboxH5,
                                             ],
                                           ),

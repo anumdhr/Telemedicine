@@ -4,29 +4,29 @@
 
 import 'dart:convert';
 
-AdminModel userFromJson(String str) => AdminModel.fromJson(json.decode(str));
+BlogModel userFromJson(String str) => BlogModel.fromJson(json.decode(str));
 
-String userToJson(AdminModel data) => json.encode(data.toJson());
+String userToJson(BlogModel data) => json.encode(data.toJson());
 
-class AdminModel {
+class BlogModel {
   String? image;
   String? title;
   String? description;
 
-  AdminModel({
+  BlogModel({
     this.image,
     this.title,
     this.description,
   });
 
-  AdminModel copyWith({
+  BlogModel copyWith({
     String? image,
     String? title,
     String? description,
   }) =>
-      AdminModel(image: this.image ?? image, title: this.title ?? title, description: this.description ?? description);
+      BlogModel(image: this.image ?? image, title: this.title ?? title, description: this.description ?? description);
 
-  factory AdminModel.fromJson(Map<String, dynamic> json) => AdminModel(
+  factory BlogModel.fromJson(Map<String, dynamic> json) => BlogModel(
         image: json["image"],
         title: json["title"],
         description: json["description"],

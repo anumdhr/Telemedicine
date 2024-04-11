@@ -81,7 +81,7 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                       controller: dc.chestController,
                       validator: (value) => Validator().emptyValidator(value),
                       decoration: InputDecoration(
-                        labelText: "Chest Pain",
+                        labelText: "Chest Pain Type",
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
@@ -118,7 +118,7 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
-                      controller: dc.cholestrolController,
+                      controller: dc.cholesterolController,
                       validator: (value) => Validator().emptyValidator(value),
                       decoration: InputDecoration(
                         labelText: "Cholestoral",
@@ -136,58 +136,7 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: dc.sugarController,
-                      decoration: InputDecoration(
-                        labelText: "Fasting blood sugar",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                          borderSide: const BorderSide(),
-                        ),
-                      ),
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        setState(() {
-                          // fbs = int.parse(value);
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: dc.heartRateController,
-                      validator: (value) => Validator().emptyValidator(value),
-                      decoration: InputDecoration(
-                        labelText: "Maximum Heart Rate",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                          borderSide: const BorderSide(),
-                        ),
-                      ),
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        setState(() {
-                          // thalach = int.parse(value);
-                        });
-                      },
-                    ),
-                  ),
                   sboxH20,
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: primaryColor,
-                    ),
-                    child: Text("0 : Absence of Heart Disease"),
-                  ),
-                  sboxH20,
-
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
@@ -196,7 +145,7 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                     onPressed: () {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
-                        dc.addResult();
+                        dc.setPrediction();
                       }
                     },
                     child: Text(
@@ -207,6 +156,15 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                       ),
                     ),
                   ),
+                  sboxH20,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: primaryColor,
+                    ),
+                    child: Text("0 : Absence of Heart Disease"),
+                  )
                 ],
               ),
             ),
@@ -216,4 +174,3 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
     );
   }
 }
-
