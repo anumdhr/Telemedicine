@@ -11,14 +11,14 @@ class PredictionRepository {
       // data: predictionModel.toJson(),
 
     final response = await dio.get(
-        'http://192.168.1.85:8000/api/user/predict/',
-        data: {
-          "Age": 67,
-          "Sex": 0,
-          "Chest pain type": 3,
-          "BP": 115,
-          "Cholesterol": 564
-        },
+        'https://fakestoreapi.com/products/1',
+        // data: {
+        //   "Age": 67,
+        //   "Sex": 0,
+        //   "Chest pain type": 3,
+        //   "BP": 115,
+        //   "Cholesterol": 564
+        // },
       );
       Logger().d(response.statusCode);
       Logger().d(response);
