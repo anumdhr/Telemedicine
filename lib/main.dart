@@ -7,6 +7,7 @@ import 'package:seventh_sem_project/firebase_options.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/auth/controller/register_controller.dart';
 import 'package:seventh_sem_project/module/auth/screen/local_database/auth_sqf_lite_database.dart';
+import 'package:seventh_sem_project/module/screens/controller/blog_controller.dart';
 import 'package:seventh_sem_project/module/screens/splash_screen.dart';
 import 'package:seventh_sem_project/module/screens/user/main_page/main_controller.dart';
 import 'package:seventh_sem_project/module/screens/user/pages/heart_disease_prediction/controller.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
     Get.put(HDPredictionController());
     Get.put(SharedPreferenceDB());
     Get.put(DoctorController());
+    Get.put(BlogController());
 
 
     final botToastBuilder = BotToastInit();

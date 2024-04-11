@@ -14,23 +14,22 @@ class AdminMain extends StatefulWidget {
   State<AdminMain> createState() => _AdminMainState();
 }
 
-
 class _AdminMainState extends State<AdminMain> {
   List<Widget> pages = [
     AdminHomePage(),
     DoctorProfilePage(),
   ];
   final dc = Get.find<DoctorController>();
+
   @override
   void initState() {
-
     dc.index.value = 0;
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: Obx(() {
           return pages[dc.index.value];
@@ -53,6 +52,7 @@ class _AdminMainState extends State<AdminMain> {
                   selectedIndex: dc.index.value,
                   tabs: const [
                     GButton(icon: Icons.home, text: "Home"),
+
                     GButton(
                       icon: FontAwesomeIcons.user,
                       text: "Profile",

@@ -21,7 +21,10 @@ class DoctorController extends GetxController {
   final doctorProfileList = <DoctorProfileModel>[].obs;
   final ac = Get.find<AuthController>();
   PlatformFile? platformFile;
+
   UploadTask? uploadTask;
+
+
 
 
   onPhotoUploaded() async {

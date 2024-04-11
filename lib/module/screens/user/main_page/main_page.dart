@@ -37,6 +37,7 @@ class _TelemedicineMainState extends State<TelemedicineMain> {
     return Scaffold(
         body: Obx(() {
           return pages[hc.index.value];
+
         }),
         bottomNavigationBar: Container(
           color: const Color(0xff7be495),
