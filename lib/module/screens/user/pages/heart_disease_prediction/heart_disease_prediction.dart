@@ -17,6 +17,8 @@ class HeartDiseasePredictionPage extends StatefulWidget {
 class _HeartInputState extends State<HeartDiseasePredictionPage> {
   final dc = Get.find<HDPredictionController>();
   final _formKey = GlobalKey<FormState>();
+  bool toggle = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +145,16 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                       backgroundColor: Color(0xffD8D9D9),
                     ),
                     onPressed: () {
+
+
+
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
                         dc.setPrediction();
                       }
+                      setState(() {
+                        toggle = true;
+                      });
                     },
                     child: Text(
                       "Result".toUpperCase(),
@@ -157,13 +165,35 @@ class _HeartInputState extends State<HeartDiseasePredictionPage> {
                     ),
                   ),
                   sboxH20,
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: primaryColor,
-                    ),
-                    child: Text("0 : Absence of Heart Disease"),
+                  if(toggle == true)
+                    // if(dc.heartDiseaseList.length != 0)
+                  Obx(
+                     () {
+                       String resultMessage = '';
+                       if (dc.predictionResult.value == '0') {
+                         resultMessage = 'No Heart Disease Predicted';
+                       } else if (dc.predictionResult.value == '1') {
+                         resultMessage = 'Heart Disease Predicted';
+                       } else if (dc.predictionResult.value == '2') {
+                         resultMessage = 'Outliers';
+                       } else {
+                         resultMessage = 'Prediction Result Not Available';
+                       }
+
+                       return dc.predictionResult.value.isNotEmpty ?
+
+
+
+                        Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: primaryColor,
+                        ),
+
+                        child: Text(" ${resultMessage}"),
+                      ) : SizedBox.shrink();
+                    }
                   )
                 ],
               ),

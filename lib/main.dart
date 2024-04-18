@@ -36,12 +36,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get.lazyPut(() => HDPredictionController(),);
+
     Get.put(AuthController());
+    Get.put(HDPredictionController());
 
     Get.put(HomeController());
     Get.put(RegisterController());
     Get.put(ProfileController());
-    Get.put(HDPredictionController());
+
     Get.put(SharedPreferenceDB());
     Get.put(DoctorController());
 
@@ -73,12 +76,7 @@ class MyApp extends StatelessWidget {
             ),
             child: child);
       },
-      // builder: (context, child) {
-      //   final botToastBuilder = BotToastInit();
-      //   BotToastNavigatorObserver();
-      //   child = botToastBuilder(context, child);
-      //   return child;
-      // },
+
     );
   }
 }

@@ -53,17 +53,6 @@ class DoctorController extends GetxController {
 
       String documentId = documentSnapshot.id;
 
-// Upload the image to Firebase Storage
-//
-//       String fileName = 'profile_image_${ac.updatedModel.firstName}_${ac.updatedModel.lastName}.jpg';
-//
-//       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref().child('doctor_images').child(fileName);
-//
-//       await ref.putFile(File(imageUrl.value));
-//
-//       String downloadURL = await ref.getDownloadURL();
-//       Logger().d(downloadURL);
-
       await FirebaseFirestore.instance.collection('adminDetails').doc(documentId).update({
         'firstName': ac.updatedModel.firstName,
         'lastName': ac.updatedModel.lastName,
@@ -124,33 +113,3 @@ class DoctorController extends GetxController {
     return doctorProfileList;
   }
 }
-// Get the data from text fields
-
-// Reference to the Firebase Storage instance
-//   firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
-//
-//   // Reference to the doctor's profile image file
-//   String filePath = ac.imageUrl.value;
-//   File file = File(filePath);
-//   String fileName = 'profile_image.jpg';
-//
-//   // Upload the image to Firebase Storage
-//   firebase_storage.Reference ref = storage.ref().child('doctor_images').child(fileName);
-//   await ref.putFile(file);
-//
-//   // Get the download URL of the uploaded image
-//   String downloadURL = await ref.getDownloadURL();
-//
-//   // Now you can store the download URL along with other data in Firestore or Realtime Database
-//   // For simplicity, let's just print the download URL
-//   print('Download URL: $downloadURL');
-
-
-
-// void onPhotoUploaded() async {
-//   final response = await ImagePickerServices().uploadImageByGallery();
-//   if (response != null) {
-//     imageUrl.value = '';
-//     imageUrl(response);
-//   }
-// }

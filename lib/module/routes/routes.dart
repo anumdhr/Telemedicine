@@ -19,11 +19,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       widget: const SplashScreen(),
       settings: settings,
     );
-  } else if (settings.name == RouteConstant.routeLoginChoose) {
-    return CustomPageRouteBuilder(
-      widget: const AdminOrUserLogin(),
-      settings: settings,
-    );
   } else if (settings.name == RouteConstant.routeRegister) {
     return CustomPageRouteBuilder(
       widget: CreateAccountPage(),

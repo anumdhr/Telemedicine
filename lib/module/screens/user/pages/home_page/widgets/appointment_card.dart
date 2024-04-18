@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:seventh_sem_project/module/common_widget/common_text.dart';
 import 'package:seventh_sem_project/module/utils/const.dart';
@@ -10,81 +11,45 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final images = [
+      'assets/images/person-holding-anatomic-heart-model-educational-purpose.jpg',
+      'assets/images/person-holding-anatomic-heart-model-educational-purpose.jpg',
+      'assets/images/person-holding-anatomic-heart-model-educational-purpose.jpg',
+      'assets/images/person-holding-anatomic-heart-model-educational-purpose.jpg',
+
+
+    ];
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: primaryColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage("assets/images/doctor_photo.jpg"),
-              ),
-              sboxW8,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    "Dr Ram Prasad",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  CustomText(
-                    "Dental",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  sboxH10,
-                ],
-              )
-            ],
-          ),
-          sboxH10,
-          ScheduleCard(),
-          sboxH10,
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                  ),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Completed',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          )
-
-        ],
+      child: CarouselSlider.builder(
+        itemCount: images.length,
+        itemBuilder: (context, index, realIndex) {
+          final image = images[index];
+          return Container(
+            color: Colors.grey,
+            child: Image.asset(image,
+            fit: BoxFit.cover,),
+          );
+        },
+        options: CarouselOptions(
+          height: 180.0,
+          enlargeCenterPage: true,
+          autoPlay: true,
+          aspectRatio: 16 / 9,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enableInfiniteScroll: true,
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          viewportFraction: 0.8,
+        ),
       ),
     );
   }
 }
+
 class ScheduleCard extends StatelessWidget {
   const ScheduleCard({
     Key? key,
@@ -130,13 +95,12 @@ class ScheduleCard extends StatelessWidget {
           ),
           Flexible(
               child: Text(
-                "2pm",
-                // appointment['time'],
-                style: const TextStyle(color: Colors.white),
-              ))
+            "2pm",
+            // appointment['time'],
+            style: const TextStyle(color: Colors.white),
+          ))
         ],
       ),
     );
   }
 }
-

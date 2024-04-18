@@ -148,10 +148,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               sboxH20,
-              const CustomText(
-                "Appointment Today",
-                style: customStyle,
-              ),
               AppointmentCard(),
               sboxH20,
               Row(
@@ -248,21 +244,7 @@ class _HomePageState extends State<HomePage> {
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.start,
-                                    //   children: <Widget>[
-                                    //     const Icon(
-                                    //       Icons.star_border,
-                                    //       color: Colors.yellow,
-                                    //       size: 16,
-                                    //     ),
-                                    //     sboxW15,
-                                    //     const Text('4.5'),
-                                    //     sboxW15,
-                                    //     const Text('Reviews'),
-                                    //     const Text('(20)'),
-                                    //   ],
-                                    // ),
+
                                   ],
                                 )
                               ],

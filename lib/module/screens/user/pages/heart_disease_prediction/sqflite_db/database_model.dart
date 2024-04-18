@@ -15,7 +15,7 @@ class PredictionModel {
   int? bp;
   int? cholesterol;
   String? dateTime;
-  String? prediction;
+  int? prediction;
 
   PredictionModel({
     this.age,
@@ -34,7 +34,7 @@ class PredictionModel {
     int? bp,
     int? cholesterol,
     String? dateTime,
-    String? prediction,
+    int? prediction,
   }) =>
       PredictionModel(
         age: age ?? this.age,
@@ -49,17 +49,17 @@ class PredictionModel {
   factory PredictionModel.fromJson(Map<String, dynamic> json) => PredictionModel(
     age: json["Age"],
     sex: json["Sex"],
-    chestPainType: json["Chest pain type"],
+    chestPainType: json["chest_pain_type"],
     bp: json["BP"],
     cholesterol: json["Cholesterol"],
     dateTime: json["dateTime"],
-    prediction: json["prediction "],
+    prediction: json["prediction"],
   );
 
   Map<String, dynamic> toJson() => {
     "Age": age,
     "Sex": sex,
-    "Chest pain type": chestPainType,
+    "chest_pain_type": chestPainType,
     "BP": bp,
     "Cholesterol": cholesterol,
 

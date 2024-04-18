@@ -21,10 +21,6 @@ class CustomPageRouteBuilder extends PageRouteBuilder {
           curve: Curves.fastLinearToSlowEaseIn,
           reverseCurve: Curves.linear,
         );
-        //  const begin = Offset(0.0, 1.0);
-        // const end = Offset.zero;
-        // const curve = Curves.fastLinearToSlowEaseIn;
-        // var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         return SlideTransition(
           // alignment: Alignment.center,
           position: Tween<Offset>(
@@ -44,16 +40,7 @@ class CustomPageRouteBuilder extends PageRouteBuilder {
         Animation<double> secAnimation,
         ) {
       return widget;
-      /*return SlideTransition(
-              // alignment: Alignment.center,
-              position: Tween<Offset>(
-                begin: const Offset(1, 0),
-                end: Offset.zero,
-              ).animate(animation),
-              // position: animation.drive(tween),
-              transformHitTests: false,
-              child: widget,
-            );*/
+
     },
   );
 }

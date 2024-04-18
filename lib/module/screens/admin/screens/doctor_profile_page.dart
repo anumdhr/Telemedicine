@@ -227,23 +227,23 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> with TickerProvid
                       InfoField(
                         controller: pc.nameController,
                         title: "Specialization",
-                        hintText: "${ac.updatedModel.firstName} ${ac.updatedModel.lastName}",
+                        hintText: "ENT",
                       ),
                       InfoField(
                         readOnly: true,
                         controller: pc.mobileController,
                         title: "Degree",
-                        hintText: "${ac.updatedModel.phone}",
+                        hintText: "Bachelors in Medicine",
                       ),
 
                       InfoField(
                         controller: pc.addressController,
                         title: "Visiting Time",
-                        hintText: "${ac.updatedModel.email}",
+                        hintText: "2:30pm - 5:30pm",
                       ),
                       InfoField(
                         controller: pc.genderController,
-                        title: "Working Hospital",
+                        title: "Scheer Memorial Hospital",
                         hintText: "${ac.updatedModel.role}",
                       ),
                       sboxH35,

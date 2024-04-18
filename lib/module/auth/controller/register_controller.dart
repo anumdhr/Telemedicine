@@ -59,17 +59,6 @@ class RegisterController extends GetxController {
     if (password == confirmPassword) {
       newUserModel.value.confirmPassword = confirmPassword;
     }
-    // if (newUserModel.value.password == "" || newUserModel.value.password == null) {
-    //   newUserModel.value.password = "";
-    //
-    // }
-    // if (newUserModel.value.password == password && newUserModel.value.password != "") {
-    //   newUserModel.value.confirmPassword = password;
-    //
-    // } else {
-    //   newUserModel.value.confirmPassword = "";
-    //
-    // }
   }
 
   void onRoleChange({required String role}) {
@@ -107,17 +96,6 @@ class RegisterController extends GetxController {
       } else {
         print("Not able to sign up");
       }
-      // NewUserModel newUser = NewUserModel(
-      //   firstname: firstNameController.text.trim(),
-      //   lastname: lastNameController.text.trim(),
-      //   phone: phoneController.text.trim(),
-      //   email: emailController.text.trim(),
-      //   password: passwordController.text.trim(),
-      //   role: roleController.text.trim(),
-      // );
-      // final user = await rr.registerUser(newUser);
-      // BotToast.showText(text: 'Register in successfully.', contentColor: Colors.green);
-      // await Future.delayed(Duration(milliseconds: 500));
       firstNameController.clear();
       lastNameController.clear();
       phoneController.clear();
@@ -186,19 +164,6 @@ class RegisterController extends GetxController {
     }
 
     if (
-        // newUserModel.value.name == "" ||
-        //     newUserModel.value.name == null ||
-        //     newUserModel.value.phone == "" ||
-        //     newUserModel.value.phone == null ||
-        //     newUserModel.value.password == "" ||
-        //     newUserModel.value.password == null ||
-        //     newUserModel.value.confirmPassword == "" ||
-        //     newUserModel.value.confirmPassword == null ||
-        //     confirmPassController.text != passwordController.text ||
-        // newUserModel.value.gender == "" ||
-        // newUserModel.value.gender == null ||
-        // newUserModel.value.address == null ||
-        // newUserModel.value.address == ""
         validateFirstName.value == false ||
             validateLastName.value == false ||
             validateEmail.value == false ||

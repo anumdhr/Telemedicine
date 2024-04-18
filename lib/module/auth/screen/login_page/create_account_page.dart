@@ -1,6 +1,4 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -10,9 +8,6 @@ import 'package:seventh_sem_project/module/common_widget/custom_textfield_for_re
 import 'package:seventh_sem_project/module/common_widget/screen_witgh_background_image.dart';
 import 'package:seventh_sem_project/module/utils/custom_text_style.dart';
 import 'package:seventh_sem_project/module/utils/customized_sized_box.dart';
-import 'package:seventh_sem_project/module/utils/route_constant.dart';
-
-
 
 class CreateAccountPage extends StatefulWidget {
   CreateAccountPage({Key? key}) : super(key: key);
@@ -26,7 +21,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWithBackgroundImage(
+    return ScreenWithScaffold(
       body: SafeArea(
         child: Stack(
           alignment: Alignment.center,
@@ -95,7 +90,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               hintText: "Last Name",
                               controller: rc.lastNameController,
                               attribute: "last name",
-                              prefixIcon: SvgPicture.asset("assets/images/street.svg", color: const Color(0xff8C8C8C), fit: BoxFit.scaleDown),
+                              prefixIcon: SvgPicture.asset("assets/images/user.svg", color: const Color(0xff8C8C8C), fit: BoxFit.scaleDown),
                             ),
                             sboxH12,
                             CustomTextFieldForRegister(
@@ -175,9 +170,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             CustomTextFieldForRegister(
                               validate: rc.validateRole.value,
 
-
                               onChange: (value) {
-                                rc.onRoleChange(role : rc.roleController.value.text.trim());
+                                rc.onRoleChange(role: rc.roleController.value.text.trim());
                               },
 
                               readOnly: true,
@@ -200,7 +194,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
-
                                       value: "User",
                                       height: 40,
                                       child: Text(
@@ -222,12 +215,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                         ),
                                       ),
                                     ),
-
                                   ];
                                 },
                               ),
                             ),
-
 
                             //terms and condition
                             sboxH30,
@@ -278,11 +269,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               onTap: () {
                                 if (rc.onCheckAllFieldValid() == true) {
                                   rc.newUser(context);
-
                                 }
                                 // BotToast.showText(text: 'Register in successfully.', contentColor: Colors.green);
-
-
                               },
                               title: "Register",
                             ),

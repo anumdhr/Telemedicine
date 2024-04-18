@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:seventh_sem_project/core/check_box_repo.dart';
 import 'package:seventh_sem_project/core/phone_no_check_repo.dart';
 import 'package:seventh_sem_project/module/auth/controller/auth-controller.dart';
 import 'package:seventh_sem_project/module/common_widget/custom_button.dart';
@@ -18,9 +17,7 @@ class LoginPage extends StatelessWidget {
 
   final _hidePassword = BehaviorSubject<bool>.seeded(true);
 
-  final checkBox = CheckboxRepo(initialState: false);
   final numberCheckRepo = PhoneNumCheckRepo();
-  final _rememberMe = BehaviorSubject<bool>.seeded(false);
 
   final ac = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
